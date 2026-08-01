@@ -28,19 +28,19 @@ function ManageRoom() {
     bedType: "",
     totalRooms: "",
     perFloor: "",
-    amenities: [], // Changed to array for checkboxes
+    amenities: [],
     planName: "",
-    inclusions: [], // Changed to array for checkboxes
+    inclusions: [],
     standardRate: "",
     currency: "INR",
-    images: [] // for edit preview (array of paths)
+    images: []
   });
 
   const MAX_IMAGES = 5;
-  const [imageFiles, setImageFiles] = useState([]); // new files selected by admin
-  const [previewUrls, setPreviewUrls] = useState([]); // object URLs for previews
-  const fileInputRef = useRef(null); // ref to clear file input programmatically
-  const titleInputRef = useRef(null); // focus when opening add form
+  const [imageFiles, setImageFiles] = useState([]);
+  const [previewUrls, setPreviewUrls] = useState([]);
+  const fileInputRef = useRef(null);
+  const titleInputRef = useRef(null);
   const mainRef = useRef(null);
   const roomsListRef = useRef(null);
 
@@ -287,7 +287,6 @@ function ManageRoom() {
         return;
       }
 
-      // append newly selected files
       imageFiles.forEach(file => fd.append("images", file));
 
       const url = editingId
@@ -431,12 +430,26 @@ function ManageRoom() {
     const raw = Array.from(e.target.files || []);
     if (raw.length === 0) return;
 
+    const allowedTypes = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
+    const invalidFiles = raw.filter((file) => !allowedTypes.includes(file.type));
+    if (invalidFiles.length > 0) {
+      setError("Only JPG, JPEG, PNG, and WEBP images are allowed.");
+      if (fileInputRef && fileInputRef.current) fileInputRef.current.value = null;
+      return;
+    }
+
+    const tooLargeFiles = raw.filter((file) => file.size > 5 * 1024 * 1024);
+    if (tooLargeFiles.length > 0) {
+      setError("Each image must be 5 MB or smaller.");
+      if (fileInputRef && fileInputRef.current) fileInputRef.current.value = null;
+      return;
+    }
+
     const existingCount = editingId ? (form.images || []).length : 0;
     const remaining = Math.max(0, MAX_IMAGES - existingCount - imageFiles.length);
 
     if (remaining <= 0) {
       setError(`You already have ${MAX_IMAGES} images. Remove some to add more.`);
-      // clear input so the user can re-open it
       if (fileInputRef && fileInputRef.current) fileInputRef.current.value = null;
       return;
     }
@@ -451,7 +464,6 @@ function ManageRoom() {
     setImageFiles(prev => [...prev, ...toAdd]);
     setPreviewUrls(prev => [...prev, ...toAdd.map(f => URL.createObjectURL(f))]);
 
-    // clear input so same files can be re-picked later if needed
     if (fileInputRef && fileInputRef.current) fileInputRef.current.value = null;
   }
 
@@ -558,7 +570,7 @@ function ManageRoom() {
                   <tr key={room._id}>
                     <td>
                       {room.images?.[0] ? (
-                        <img src={`${API}/${room.images[0]}`} alt={room.title} style={{ width: "60px", height: "60px", objectFit: "cover", borderRadius: "6px" }} />
+                        <img src={room.images[0].startsWith("http") ? room.images[0] : `${API}/${room.images[0].replace(/^\//, "")}`} alt={room.title} style={{ width: "60px", height: "60px", objectFit: "cover", borderRadius: "6px" }} />
                       ) : (
                         <div style={{ width: "60px", height: "60px", backgroundColor: "#e5e7eb", borderRadius: "6px", display: "flex", alignItems: "center", justifyContent: "center", color: "#9ca3af", fontSize: "12px" }}>
                           No Image
@@ -816,7 +828,7 @@ function ManageRoom() {
                       <input
                         ref={fileInputRef}
                         type="file"
-                        accept="image/*"
+                        accept="image/jpeg,image/jpg,image/png,image/webp"
                         multiple
                         onChange={handleFileSelect}
                         className="file-input"
@@ -831,7 +843,7 @@ function ManageRoom() {
                           <div className="preview-label">Current Images:</div>
                           {form.images.map((img, idx) => (
                             <div key={idx} className="image-preview-item">
-                              <img src={`${API}/${img}`} alt={`Room ${idx}`} />
+                              <img src={img.startsWith("http") ? img : `${API}/${img.replace(/^\//, "")}`} alt={`Room ${idx}`} />
                               <button
                                 type="button"
                                 onClick={() => removeExistingImage(img)}

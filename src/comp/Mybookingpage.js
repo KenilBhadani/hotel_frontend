@@ -14,9 +14,11 @@ const PLACEHOLDER =
 
 // Helper: safely get the room image URL
 function getRoomImageSrc(room) {
-  if (!room || !room.images || room.images.length === 0) return PLACEHOLDER;
+  if (!room) return PLACEHOLDER;
 
-  const img = room.images[0];
+  const img = room.image || room.images?.[0];
+  if (!img) return PLACEHOLDER;
+
   if (img.startsWith("http://") || img.startsWith("https://")) return img;
 
   const safeName = String(img).trim().replace(/^\/+/, "").replace(/^uploads\//, "");

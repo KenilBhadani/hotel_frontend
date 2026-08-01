@@ -24,7 +24,11 @@ const RoomCard = ({ room, onSelect, checkIn, checkOut }) => {
 
   if (!room) return null;
 
-  const images = room.images || [];
+  const images = Array.isArray(room.images) && room.images.length > 0
+    ? room.images
+    : room.image
+      ? [room.image]
+      : [];
   const {
     rates,
     pricing,

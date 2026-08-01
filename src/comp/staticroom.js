@@ -20,7 +20,11 @@ const RoomCard = ({ room }) => {
   const navigate = useNavigate();
   const [imageIndex, setImageIndex] = useState(0);
 
-  const images = room.images || [];
+  const images = Array.isArray(room.images) && room.images.length > 0
+    ? room.images
+    : room.image
+      ? [room.image]
+      : [];
   const amenities =
     room.amenities?.map((a) => (typeof a === "string" ? a : a.name)) || [];
 

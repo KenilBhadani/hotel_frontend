@@ -286,10 +286,13 @@ export default function BookingForm() {
     );
   }
 
-  const imageUrl =
-    room?.images?.length > 0
-      ? `${API_URL}/${room.images[0].replace(/^\/+/, "")}`
-      : "/no-room.jpg";
+  const getRoomImageUrl = (value) => {
+    if (!value) return "/no-room.jpg";
+    if (typeof value === "string" && value.startsWith("http")) return value;
+    return `${API_URL}/${String(value).replace(/^\/+/, "")}`;
+  };
+
+  const imageUrl = getRoomImageUrl(room?.image || room?.images?.[0]);
 
   return (
     <>

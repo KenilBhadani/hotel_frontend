@@ -1,0 +1,239 @@
+/* --- GLOBAL --- */
+.about-page-container {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    background-color: #fff;
+}
+
+/* --- NEW HEADER STYLES --- */
+.abt-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background-color: rgba(20, 33, 61, 0.85); /* Dark Blue with transparency */
+    backdrop-filter: blur(8px);
+    padding: 15px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+}
+
+.abt-nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.abt-logo a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.abt-nav-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.abt-nav-item {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: color 0.3s;
+}
+
+.abt-nav-item:hover {
+    color: #fca311;
+}
+
+.abt-back-btn {
+    background-color: #fca311;
+    color: #14213d;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.abt-back-btn:hover {
+    background-color: white;
+    transform: scale(1.05);
+}
+
+/* --- HERO BANNER --- */
+.abt-hero {
+    position: relative;
+    height: 70vh; /* Increased slightly to accommodate header overlap */
+    width: 100%;
+}
+
+.abt-hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.abt-hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.abt-hero-title {
+    font-size: 4rem;
+    color: white;
+    font-weight: 700;
+    letter-spacing: 3px;
+    font-family: serif;
+    margin-top: 60px; /* Push down due to fixed header */
+}
+
+/* --- HERITAGE SECTION --- */
+.abt-heritage-section {
+    padding: 100px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.abt-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+@media (min-width: 768px) {
+    .abt-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.abt-tag {
+    color: #fca311;
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.abt-heading {
+    font-size: 3rem;
+    color: #14213d;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    font-family: serif;
+}
+
+.abt-gold-text {
+    color: #fca311;
+}
+
+.abt-desc {
+    color: #555;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+/* Image Wrapper */
+.abt-image-wrapper {
+    position: relative;
+}
+
+.abt-interior-img {
+    width: 100%;
+    height: 550px;
+    object-fit: cover;
+    border-radius: 4px; /* More elegant for luxury */
+    box-shadow: 20px 20px 0px #f8fafc; /* Design accent */
+}
+
+.abt-stat-box {
+    position: absolute;
+    bottom: 40px;
+    left: -40px;
+    background-color: white;
+    padding: 35px;
+    border-left: 5px solid #fca311;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    display: none;
+}
+
+@media (min-width: 1024px) {
+    .abt-stat-box {
+        display: block;
+    }
+}
+
+.abt-stat-number {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #14213d;
+    font-family: serif;
+    margin: 0;
+}
+
+.abt-stat-label {
+    color: #666;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+
+/* --- TEAM SECTION --- */
+.abt-team-section {
+    background-color: #f8fafc;
+    padding: 100px 20px;
+}
+
+.abt-section-title {
+    font-size: 2.8rem;
+    font-family: serif;
+    font-weight: 700;
+    color: #14213d;
+    margin-bottom: 60px;
+}
+
+.abt-team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+}
+
+.abt-team-card {
+    background: white;
+    border-radius: 0; 
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.abt-team-img-box {
+    height: 400px;
+}
+
+.abt-member-role {
+    color: #fca311;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    margin-top: 8px;
+    display: block;
+}

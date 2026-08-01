@@ -1,0 +1,290 @@
+/* ================= ROOT ================= */
+:root {
+  --bg: #f4f6fb;
+  --card: #ffffff;
+  --primary: #4f46e5;
+  --danger: #ef4444;
+  --success: #22c55e;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --radius: 14px;
+  --shadow-sm: 0 6px 20px rgba(0,0,0,0.06);
+  --shadow-lg: 0 16px 40px rgba(0,0,0,0.08);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ================= LAYOUT ================= */
+.admin-container {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg);
+  
+}
+
+/* ================= SIDEBAR ================= */
+.sidebar {
+  width: 250px;
+  background: linear-gradient(180deg, #020617, #020617);
+  color: #fff;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar h1 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.sidebar a {
+  color: #c7d2fe;
+  text-decoration: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.sidebar a:hover {
+  background: rgba(99,102,241,0.15);
+  color: #fff;
+}
+
+.sidebar a.active {
+  background: rgba(99,102,241,0.25);
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ================= MAIN ================= */
+.main {
+  flex: 1;
+  padding: 28px;
+}
+
+/* ================= TOP BAR ================= */
+.top-bar {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 18px 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.top-bar h2 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.logout-btn {
+  background: var(--danger);
+  color: #fff;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  opacity: 0.9;
+}
+
+/* ================= CARD ================= */
+.card {
+  background: var(--card);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 22px;
+}
+
+.card-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+/* ================= SEARCH ================= */
+.search-bar {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+}
+
+.search-bar button {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+.search-bar button:first-of-type {
+  background: var(--primary);
+  color: #fff;
+}
+
+.search-bar button:last-of-type {
+  background: #f3f4f6;
+}
+
+/* ================= TABLE ================= */
+.room-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.room-table thead {
+  background: #f9fafb;
+}
+
+.room-table th {
+  text-align: left;
+  padding: 14px 16px;
+  font-size: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+.room-table td {
+  padding: 14px 16px;
+  font-size: 14px;
+  border-bottom: 1px solid var(--border);
+}
+
+.room-table tr:hover {
+  background: #f9fafb;
+}
+
+/* ================= STATUS BADGES ================= */
+.available {
+  background: #dcfce7;
+  color: #166534;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.not-available {
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* ================= ACTION BUTTONS ================= */
+.btn-danger {
+  background: #fee2e2;
+  color: #991b1b;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-success {
+  background: #dcfce7;
+  color: #166534;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn-danger:hover,
+.btn-success:hover {
+  opacity: 0.85;
+}
+
+/* ================= CONFIRM MODAL ================= */
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.confirm-modal {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 24px;
+  width: 360px;
+  box-shadow: var(--shadow-lg);
+  animation: scaleIn 0.2s ease;
+}
+
+.confirm-modal h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.confirm-modal p {
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-cancel {
+  background: #f3f4f6;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* ================= ANIMATION ================= */
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 900px) {
+  .sidebar {
+    display: none;
+  }
+
+  .admin-container {
+    flex-direction: column;
+  }
+}

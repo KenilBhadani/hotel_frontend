@@ -1,0 +1,160 @@
+/* --- SECTION CONTAINER --- */
+.mid-luxury-section {
+    position: relative;
+    width: 100%;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- BACKGROUND LAYERS --- */
+.mid-bg-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.mid-bg-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1.05); /* Slight zoom for depth */
+}
+
+/* Dark gradient overlay for readability */
+.mid-overlay-dark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(20, 33, 61, 0.85), rgba(0, 0, 0, 0.95));
+}
+
+/* --- CONTENT WRAPPER --- */
+.mid-content-wrapper {
+    position: relative;
+    z-index: 2;
+    max-width: 1200px;
+    width: 100%;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+/* --- HEADER TYPOGRAPHY --- */
+.mid-header-center {
+    margin-bottom: 60px;
+}
+
+.mid-tagline {
+    color: #fca311; /* Gold */
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.mid-headline {
+    font-size: 3rem;
+    color: #ffffff;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.mid-text-gold {
+    color: #fca311;
+    font-family: serif; /* Elegant font for "Best" */
+    font-style: italic;
+}
+
+.mid-divider {
+    width: 80px;
+    height: 4px;
+    background-color: #fca311;
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+/* --- CARDS GRID --- */
+.mid-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+}
+
+/* --- GLASSMORPHIC CARD DESIGN --- */
+.mid-glass-card {
+    background: rgba(255, 255, 255, 0.05); /* Transparent white */
+    backdrop-filter: blur(10px); /* The frosted glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px 25px;
+    border-radius: 12px;
+    transition: all 0.4s ease;
+    text-align: center;
+    color: white;
+}
+
+/* Hover Effect: Lift up and glow */
+.mid-glass-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #fca311;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* --- ICON STYLING --- */
+.mid-icon-circle {
+    width: 70px;
+    height: 70px;
+    background-color: rgba(252, 163, 17, 0.1); /* Low opacity gold */
+    color: #fca311;
+    border-radius: 50%;
+    font-size: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 25px auto;
+    transition: all 0.4s ease;
+}
+
+.mid-glass-card:hover .mid-icon-circle {
+    background-color: #fca311;
+    color: #14213d; /* Dark blue icon on hover */
+    transform: rotateY(360deg); /* Cool spin effect */
+}
+
+/* --- CARD TEXT --- */
+.mid-glass-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.mid-glass-card p {
+    font-size: 0.95rem;
+    color: #d1d5db; /* Light gray text */
+    line-height: 1.6;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .mid-headline {
+        font-size: 2.2rem;
+    }
+    
+    .mid-cards-grid {
+        grid-template-columns: 1fr; /* Stack cards on mobile */
+        padding: 0 10px;
+    }
+    
+    .mid-luxury-section {
+        padding: 40px 0;
+    }
+}

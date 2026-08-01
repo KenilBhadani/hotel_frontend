@@ -1,0 +1,152 @@
+/* --- ROYAL PARK THEME VARIABLES --- */
+:root {
+  --rp-navy: #14213d;
+  --rp-gold: #fca311;
+  --rp-gray: #e5e7eb;
+  --rp-white: #ffffff;
+}
+
+/* --- CONTAINER --- */
+.bk-stepper-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
+
+/* --- HEADER --- */
+.bk-header {
+  margin-bottom: 50px;
+}
+
+.bk-subtitle {
+  color: var(--rp-gold);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.bk-title {
+  color: var(--rp-navy);
+  font-size: 2.5rem;
+  font-weight: 700;
+  font-family: serif; /* Luxury touch */
+  margin: 0;
+}
+
+/* --- STEPPER WRAPPER --- */
+.bk-stepper-wrapper {
+  position: relative;
+  padding: 0 20px;
+}
+
+/* --- TRACK LINES --- */
+.bk-track {
+  position: absolute;
+  top: 25px; /* Aligns with center of circle (50px / 2) */
+  left: 50px; /* Offset to start inside first circle */
+  right: 50px;
+  height: 4px;
+  background-color: var(--rp-gray);
+  z-index: 0;
+  border-radius: 2px;
+}
+
+.bk-progress {
+  position: absolute;
+  top: 25px;
+  left: 50px;
+  height: 4px;
+  background-color: var(--rp-navy);
+  z-index: 1;
+  transition: width 0.5s ease-in-out;
+  border-radius: 2px;
+}
+
+/* --- STEPS LAYOUT --- */
+.bk-steps-flex {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2; /* Sits above lines */
+}
+
+.bk-step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 120px; /* Fixed width ensures labels center */
+}
+
+/* --- CIRCLE DESIGN --- */
+.bk-circle {
+  width: 50px;
+  height: 50px;
+  background-color: var(--rp-white);
+  border: 3px solid var(--rp-gray);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: #9ca3af; /* Disabled gray */
+  margin-bottom: 15px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy effect */
+}
+
+.bk-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #9ca3af;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+
+/* --- ACTIVE STATE (Current Step) --- */
+.bk-step-item.active .bk-circle {
+  border-color: var(--rp-gold);
+  color: var(--rp-navy);
+  transform: scale(1.2); /* Make it pop */
+  box-shadow: 0 0 20px rgba(252, 163, 17, 0.4);
+  background-color: var(--rp-white);
+}
+
+.bk-step-item.active .bk-label {
+  color: var(--rp-navy);
+  font-weight: 800;
+}
+
+/* --- COMPLETED STATE (Past Steps) --- */
+.bk-step-item.completed .bk-circle {
+  background-color: var(--rp-navy);
+  border-color: var(--rp-navy);
+  color: var(--rp-white);
+}
+
+.bk-step-item.completed .bk-label {
+  color: var(--rp-navy);
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 600px) {
+  .bk-title {
+    font-size: 1.8rem;
+  }
+  
+  .bk-label {
+    font-size: 0.7rem;
+    display: none; /* Hide labels on very small screens if needed */
+  }
+
+  /* Show labels only for active step on mobile */
+  .bk-step-item.active .bk-label {
+    display: block;
+  }
+}

@@ -1,0 +1,205 @@
+/* --- Fonts & Colors (Adjust to match your project theme) --- */
+:root {
+    --about-bg: #f9f9f9; /* Soft off-white background */
+    --about-text-dark: #222222; /* Deep charcoal */
+    --about-text-light: #666666; /* Soft gray */
+    --about-accent: #c0a062; /* Elegant Gold/Bronze color */
+    --serif-font: 'Playfair Display', serif; /* Example premium font */
+    --sans-font: 'Segoe UI', Roboto, sans-serif;
+}
+
+/* --- Section Wrapper --- */
+.about-premium-section {
+    background-color: var(--about-bg);
+    padding: 100px 20px;
+    overflow: hidden; /* Prevents overlapping elements causing scrollbars */
+    font-family: var(--sans-font);
+}
+
+.about-content-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 80px; /* Space between text and images */
+}
+
+/* =========================
+   LEFT SIDE: TEXT CONTENT
+   ========================= */
+.about-text-side {
+    flex: 1;
+    max-width: 500px;
+    z-index: 2; /* Ensure text sits above background patterns */
+}
+
+/* The Tag (e.g., "ABOUT US") */
+.tag-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.about-tag-line {
+    width: 40px;
+    height: 2px;
+    background-color: var(--about-accent);
+}
+
+.about-tag {
+    color: var(--about-accent);
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+/* The Title */
+.about-title {
+    font-family: var(--serif-font);
+    font-size: 3rem;
+    line-height: 1.2;
+    color: var(--about-text-dark);
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+/* The Description */
+.about-desc {
+    color: var(--about-text-light);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+
+/* The Premium Button */
+.about-btn-premium {
+    padding: 15px 35px;
+    background-color: var(--about-text-dark);
+    color: var(--about-accent);
+    border: 1px solid var(--about-text-dark);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.about-btn-premium:hover {
+    background-color: var(--about-accent);
+    color: white;
+    border-color: var(--about-accent);
+}
+
+/* =========================
+   RIGHT SIDE: IMAGE GRID
+   ========================= */
+.about-image-side {
+    flex: 1.2; /* Takes slightly more space than text */
+    position: relative;
+    /* This height ensures enough space for the overlapping images */
+    min-height: 500px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- THE 4:3 ASPECT RATIO TRICK --- */
+/* This container forces its children to have a 4:3 ratio regardless of screen size */
+.ratio-box-4-3 {
+    position: relative;
+    width: 100%;
+    /* Padding-bottom defines height based on width percentage. 3/4 = 75% */
+    padding-bottom: 75%; 
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15); /* Luxurious shadow */
+}
+
+.grid-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensures image fills box without stretching */
+    transition: transform 0.5s ease;
+}
+
+/* Subtle hover zoom effect */
+.img-frame:hover .grid-img {
+    transform: scale(1.05);
+}
+
+/* --- IMAGE POSITIONING (Overlapping) --- */
+.img-frame {
+    position: absolute;
+}
+
+/* Main (Back) Image */
+.frame-main {
+    width: 75%; /* Controls size relative to container */
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+/* Accent (Front) Image */
+.frame-accent {
+    width: 55%; /* Smaller than main image */
+    bottom: 0; /* Pushed to bottom right */
+    right: 0;
+    z-index: 2; /* Sits on top */
+    border: 8px solid white; /* Clean white border to separate them */
+}
+
+/* Decorative Pattern Background (Optional but adds polish) */
+.about-pattern-bg {
+    position: absolute;
+    top: -10%;
+    right: -10%;
+    width: 60%;
+    height: 70%;
+    background-image: radial-gradient(circle, var(--about-accent) 1px, transparent 1px);
+    background-size: 20px 20px; /* Dotted pattern */
+    opacity: 0.1;
+    z-index: 0;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+   ========================= */
+@media (max-width: 1024px) {
+    .about-title { font-size: 2.5rem; }
+    .about-content-container { gap: 40px; }
+}
+
+@media (max-width: 768px) {
+    .about-content-container {
+        flex-direction: column; /* Stack vertically on mobile */
+        padding: 40px 0;
+        gap: 60px;
+    }
+
+    .about-text-side {
+        text-align: center;
+        padding: 0 20px;
+        max-width: 100%;
+    }
+
+    .tag-wrapper { justify-content: center; }
+
+    .about-image-side {
+        width: 100%;
+        /* Reduce height slightly on mobile */
+        min-height: 400px; 
+        /* Ensure images don't overflow the screen width on small phones */
+        padding-right: 20px; 
+    }
+    
+    /* Adjust image sizes for mobile */
+    .frame-main { width: 80%; left: 20px; }
+    .frame-accent { width: 60%; right: 20px; }
+}

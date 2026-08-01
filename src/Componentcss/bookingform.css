@@ -1,0 +1,372 @@
+:root {
+  --card:#ffffff;
+  --muted: #6b6b75;
+  --accent: #c79f3f;
+  --accent-600: #a3792d;
+  --border: #e8e8ee;
+  --shadow: 0 12px 36px rgba(15, 15, 15, 0.06);
+  --radius: 12px;
+  --max: 1200px;
+
+}
+
+.bf-page {
+  background: var(--bg);
+  min-height: 100vh;
+  padding: 40px 18px;
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+  background-image: url('../images/room.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  backdrop-filter: initial;
+  z-index: 0;
+  padding: 50px 0px;
+}
+
+/* Grid layout */
+.booking-layout {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 28px;
+  align-items: start;
+}
+@media (max-width: 940px) {
+  .booking-layout {
+    grid-template-columns: 1fr;
+    padding: 0 12px;
+  }
+}
+
+/* Card base */
+.form-card,
+.summary-card,
+.policy-card {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* LEFT: form */
+.form-card {
+  padding: 26px;
+}
+.form-header h2 {
+  margin: 0;
+  font-size: 16px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #222;
+}
+.muted {
+  color: var(--muted);
+}
+
+/* form layout */
+.booking-form {
+  margin-top: 14px;
+}
+.row {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+  align-items: flex-end;
+}
+.field {
+  position: relative;
+  flex: 1;
+}
+.select-field {
+  max-width: 140px;
+  position: relative;
+}
+
+/* inputs look */
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+
+  /* TRANSPARENT BACKGROUND */
+  background: rgba(255, 255, 255, 0.65);
+
+  font-size: 14px;
+  color: #222;
+
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+
+  transition: 
+    box-shadow 0.16s ease,
+    border-color 0.16s ease,
+    background 0.16s ease;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(199, 159, 63, 0.6);
+  box-shadow: 0 8px 26px rgba(199, 159, 63, 0.2);
+}
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* floating label (base) */
+.floating {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  color: var(--muted);
+  font-size: 13px;
+  pointer-events: none;
+  transition: transform 0.18s ease, font-size 0.18s ease, top 0.18s ease, color 0.18s ease;
+  background: transparent;
+  padding: 0 6px;
+  z-index: 4;
+}
+.floating.active {
+  transform: translateY(-28px); /* adjust so it does not overlap <p> */
+  font-size: 12px;
+  color: var(--accent-600);
+}
+
+/* ---------- SELECT (Title) specific adjustments ---------- */
+.select-field select {
+  padding: 12px 36px 12px 12px; /* reduce top padding so select text is visible */
+  -webkit-appearance: none;
+  appearance: none;
+  background: #fff; /* make sure it's visible */
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  font-size: 14px;
+  color: #222;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.select-field .floating {
+ top: 12px; /* keep label slightly above text */
+  left: 12px;
+  font-size: 13px;
+  background: #fff; /* ensures it doesn't overlap select text */
+  padding: 0 4px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.select-field .floating.active {
+ transform: translateY(-26px); /* moves label up on focus/value */
+  font-size: 12px;
+  color: var(--accent-600);/* allow dropdown click */
+}
+
+/* custom arrow */
+.select-field::after {
+  content: "▾";
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  color: var(--muted);
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* ---------- Mobile phone field ---------- */
+.mobile {
+  position: relative;
+  flex: 1;
+}
+.country-code {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  font-size: 13px;
+  pointer-events: none;
+  z-index: 3;
+}
+.mobile input {
+  padding-left: 60px; /* room for +91 */
+  position: relative;
+  z-index: 2;
+}
+.mobile .floating {
+  left: 60px;
+}
+
+/* counter */
+.counter {
+  position: absolute;
+  right: 12px;
+  bottom: -18px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* error */
+.form-error {
+  margin: 12px 0;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: #fff6f6;
+  color: #9b2a2a;
+  border: 1px solid #f3caca;
+}
+
+/* checkbox row */
+.checkbox-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  margin-top: 8px;
+}
+.checkbox-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent);
+  margin-top: 4px;
+}
+.agree-label {
+  font-size: 13px;
+  color: #222;
+  line-height: 1.45;
+}
+.link {
+  color: var(--accent-600);
+  margin: 0 6px;
+  text-decoration: none;
+}
+
+/* actions */
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 18px;
+  align-items: center;
+}
+.btn-primary {
+  background: linear-gradient(90deg, var(--accent), var(--accent-600));
+  color: #fff;
+  border: none;
+  padding: 12px 16px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 30px rgba(199, 159, 63, 0.12);
+}
+.btn-primary[disabled] {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.btn-ghost {
+  background: transparent;
+  color: #333;
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  border-radius: 8px;
+}
+
+/* RIGHT: summary column */
+.summary-column {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  color: #222;
+}
+.summary-card {
+  padding: 18px;
+  top: 22px;
+}
+.summary-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.details-toggle {
+  background: transparent;
+  border: none;
+  color: var(--accent-600);
+  cursor: pointer;
+  font-weight: 700;
+}
+
+/* room / price */
+.room-info .line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.room-sub {
+  font-size: 13px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+.price-details {
+  overflow: hidden;
+  max-height: 0;
+  
+}
+.price-details.open {
+  max-height: 220px;
+}
+.price-line {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+}
+.price-line.muted {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* total */
+.total-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+  padding: 10px;
+  background: linear-gradient(180deg, #fff, #fffaf0);
+  border-radius: 8px;
+}
+.total-amount {
+  font-weight: 800;
+  font-size: 18px;
+}
+
+/* policy */
+.policy-card {
+  padding: 14px;
+  border-radius: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+}
+.policy-card h4 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+}
+
+/* small helpers */
+.small {
+  font-size: 12px;
+  color: var(--muted);
+}

@@ -1,0 +1,178 @@
+/* --- SECTION STYLING --- */
+.evt-section {
+    padding: 80px 20px;
+    background-color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.evt-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- HEADER --- */
+.evt-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.evt-tag {
+    color: #fca311; /* RoyalPark Gold */
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.evt-title {
+    font-size: 2.8rem;
+    color: #14213d; /* Dark Blue */
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.evt-gold {
+    color: #fca311;
+    font-family: serif; /* Elegant contrast */
+    font-style: italic;
+}
+
+.evt-subtitle {
+    color: #6b7280;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* --- GRID LAYOUT --- */
+.evt-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+}
+
+/* --- CARD DESIGN --- */
+.evt-card {
+    position: relative;
+    height: 450px; /* Fixed height for consistency */
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Image */
+.evt-img-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.evt-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+/* Hover Zoom Effect */
+.evt-card:hover .evt-img {
+    transform: scale(1.1);
+}
+
+/* Gradient Overlay (Makes text readable) */
+.evt-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.9) 100%);
+    transition: background 0.3s ease;
+}
+
+/* --- CARD CONTENT --- */
+.evt-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 30px;
+    z-index: 2;
+    transform: translateY(20px); /* Slightly pushed down initially */
+    transition: transform 0.4s ease;
+}
+
+.evt-card:hover .evt-content {
+    transform: translateY(0); /* Slides up on hover */
+}
+
+/* Capacity Badge */
+.evt-capacity-badge {
+    display: inline-block;
+    background-color: #fca311;
+    color: #14213d;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+/* Title */
+.evt-card-title {
+    color: white;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    font-family: serif;
+}
+
+/* Description (Hidden initially on mobile, slides up on desktop) */
+.evt-card-desc {
+    color: #e5e7eb;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    opacity: 0.9;
+    max-height: 0; /* Hidden by default for clean look */
+    overflow: hidden;
+    transition: max-height 0.5s ease;
+}
+
+.evt-card:hover .evt-card-desc {
+    max-height: 100px; /* Reveals on hover */
+}
+
+/* Button */
+.evt-btn-arrow {
+    background: none;
+    border: none;
+    color: #fca311;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+.evt-btn-arrow:hover {
+    color: white;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 768px) {
+    .evt-title { font-size: 2.2rem; }
+    
+    .evt-card { height: 400px; }
+    
+    /* On mobile, always show description, don't rely on hover */
+    .evt-card-desc { max-height: 100px; }
+    .evt-content { transform: translateY(0); }
+}

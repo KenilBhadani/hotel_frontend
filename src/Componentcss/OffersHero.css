@@ -1,0 +1,205 @@
+/* --- HERO SECTION CONTAINER --- */
+.offers-hero-section {
+    position: relative;
+    /* Height of the hero section. Adjust as needed. */
+    min-height: 600px; 
+    display: flex;
+    align-items: center;
+    /* Ensure font matches your previous design */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    overflow: hidden; /* Prevents horizontal scrollbar if image is wide */
+}
+
+/* --- 1. BACKGROUND IMAGE LAYERS --- */
+.hero-image-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Sits behind content */
+}
+
+.hero-bg-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Optional: A slight zoom effect on hover could go here */
+}
+
+/* Dark overlay to make white text pop if needed, or add mood */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* A subtle dark gradient from left to right */
+    background: linear-gradient(to right, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 100%);
+}
+
+/* --- 2. CONTENT WRAPPER (Center the layout) --- */
+.hero-content-wrapper {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 2; /* Sits on top of image */
+}
+
+/* --- THE FLOATING TEXT CARD --- */
+.hero-text-card {
+    background-color: white;
+    /* Max width ensures it doesn't stretch too wide on large screens */
+    max-width: 550px; 
+    padding: 40px;
+    border-radius: 16px;
+    /* A nice, soft shadow to give it depth ("floating" effect) */
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    
+    /* Optional: Slight animation when page loads */
+    animation: slideUp 0.8s ease-out;
+}
+
+/* Small Tag above headline */
+.offer-tag {
+    display: inline-block;
+    background-color: #dbeafe; /* Light blue background */
+    color: #2563eb; /* Your brand blue */
+    font-size: 0.875rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Headline */
+.hero-headline {
+    font-size: 2.5rem;
+    line-height: 1.2;
+    font-weight: 800;
+    color: #111827; /* Dark gray/black */
+    margin-bottom: 16px;
+}
+
+/* Highlight words in blue */
+.highlight-text {
+    color: #2563eb;
+}
+
+/* Subtext */
+.hero-subtext {
+    font-size: 1.125rem;
+    color: #4b5563; /* Medium gray */
+    line-height: 1.6;
+    margin-bottom: 32px;
+}
+
+/* Buttons Container */
+.hero-actions {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+/* Primary Button (Blue) */
+.btn-hero-primary {
+    background-color: #2563eb;
+    color: white;
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-hero-primary:hover {
+    background-color: #1d4ed8; /* Darker blue */
+    transform: translateY(-2px);
+}
+
+/* Secondary Button (Outline) */
+.btn-hero-secondary {
+    background-color: transparent;
+    color: #2563eb;
+    border: 2px solid #2563eb;
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-hero-secondary:hover {
+    background-color: #eff6ff; /* Very light blue */
+}
+
+/* Disclaimer footer */
+.offer-disclaimer {
+    font-size: 0.8rem;
+    color: #9ca3af; /* Light gray */
+    border-top: 1px solid #e5e7eb;
+    padding-top: 16px;
+}
+
+/* --- Simple entry animation --- */
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* --- RESPONSIVE DESIGN (Mobile) --- */
+@media (max-width: 768px) {
+    .offers-hero-section {
+        /* On mobile, make the section taller so image shows above text */
+        min-height: auto;
+        flex-direction: column;
+        padding-bottom: 40px;
+    }
+
+    .hero-image-container {
+        position: relative; /* Image stacks on top normally */
+        height: 300px; /* Fixed height for image on mobile */
+    }
+
+    .hero-overlay {
+        /* Remove gradient on mobile, maybe just a flat dark tint */
+        background: rgba(0,0,0,0.2);
+    }
+    
+    .hero-content-wrapper {
+        padding: 0 20px;
+        /* Pull the card up slightly over the image */
+        margin-top: -40px; 
+    }
+
+    .hero-text-card {
+        max-width: 100%; /* Full width card */
+        padding: 30px 20px;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-headline {
+        font-size: 1.8rem; /* Smaller font on mobile */
+    }
+
+    .hero-actions {
+        flex-direction: column; /* Stack buttons on mobile */
+    }
+    
+    .btn-hero-primary, .btn-hero-secondary {
+        width: 100%;
+    }
+}

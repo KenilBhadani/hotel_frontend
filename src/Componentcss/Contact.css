@@ -1,0 +1,187 @@
+/* --- GLOBAL --- */
+.contact-page-wrapper {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ffffff;
+    color: #333;
+}
+
+/* --- HERO BANNER --- */
+.contact-hero {
+    background-color: #14213d; /* Dark Blue */
+    padding: 100px 20px;
+    text-align: center;
+    color: white;
+}
+
+.contact-tag {
+    color: #fca311; /* Gold */
+    font-weight: 700;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.contact-title {
+    font-size: 3rem;
+    font-weight: 700;
+    font-family: serif;
+    margin: 0;
+}
+
+/* --- MAIN CONTAINER --- */
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 20px;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 60px;
+}
+
+/* Tablet & Desktop Layout */
+@media (min-width: 900px) {
+    .contact-grid {
+        grid-template-columns: 1.5fr 1fr; /* Form takes more space */
+    }
+}
+
+/* --- FORM SECTION --- */
+.contact-heading {
+    font-size: 2rem;
+    color: #14213d;
+    font-weight: 700;
+    margin-bottom: 30px;
+    font-family: serif;
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.contact-row {
+    display: flex;
+    gap: 20px;
+}
+
+.contact-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.contact-input-group label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #555;
+    text-transform: uppercase;
+}
+
+.contact-input {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.contact-input:focus {
+    outline: none;
+    border-color: #fca311;
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(252, 163, 17, 0.1);
+}
+
+.contact-textarea {
+    resize: vertical;
+}
+
+.contact-submit-btn {
+    background-color: #14213d;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s;
+    align-self: flex-start;
+}
+
+.contact-submit-btn:hover {
+    background-color: #fca311;
+    color: #14213d;
+}
+
+/* --- INFO SECTION --- */
+.contact-info-section {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.contact-item {
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+}
+
+.contact-icon {
+    width: 45px;
+    height: 45px;
+    background-color: #fff4e0; /* Light Gold BG */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.contact-label {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #14213d;
+    margin-bottom: 5px;
+}
+
+.contact-text {
+    color: #666;
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+}
+
+/* --- MAP --- */
+.contact-map-wrapper {
+    width: 100%;
+    height: 300px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+/* Mobile Responsive Adjustments */
+@media (max-width: 600px) {
+    .contact-row {
+        flex-direction: column;
+    }
+    
+    .contact-submit-btn {
+        width: 100%;
+    }
+}

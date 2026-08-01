@@ -1,0 +1,31 @@
+/* HEADER */
+.booking-header {
+  background: #f5f3ef;
+  padding: 30px;
+}
+
+.header-box {
+  display: flex;
+  gap: 15px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.header-box input {
+  flex: 1;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.header-box button {
+  background: #b08a3e;
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  font-weight: 600;
+  border-radius: 6px;
+}

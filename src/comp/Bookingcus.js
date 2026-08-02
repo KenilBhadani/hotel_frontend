@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { Users, ShieldCheck, ArrowRight } from "lucide-react";
-import Header2 from "./Header2";
+import HeaderOfCustomer from "./HeaderOfCustomer";
 import Footer from "./footer";
 import FloatingInput from "./FloatingInput";
 import { getTabToken } from "../utils/tabSession";
@@ -278,7 +278,7 @@ export default function BookingForm() {
   if (!ready) {
     return (
       <>
-        <Header2 />
+        <HeaderOfCustomer />
         <div className="min-h-screen flex items-center justify-center text-slate-500">
           Restoring your booking...
         </div>
@@ -296,9 +296,9 @@ export default function BookingForm() {
 
   return (
     <>
-      <Header2 />
+      <HeaderOfCustomer />
       <ToastContainer position="top-right" autoClose={3000} />
-      <div className="min-h-screen bg-slate-50 px-6 py-12">
+      <div className="min-h-screen bg-transparent px-6 py-12">
         <div className="max-w-6xl mx-auto">
           <h1 className="text-3xl font-black mb-6">Complete Your Reservation</h1>
           <form onSubmit={handleSubmit} className="grid lg:grid-cols-12 gap-8">

@@ -1,6 +1,6 @@
 // Bookformpage.js
 import { useLocation, Navigate } from "react-router-dom";
-import Header2 from "./Header2";
+import HeaderOfCustomer from "./HeaderOfCustomer";
 import BookingForm from "./Bookingcus";
 
 function Bookformpage() {
@@ -15,8 +15,8 @@ function Bookformpage() {
   }
 
   return (
-    <div className="bg-slate-50 min-h-screen">
-      <Header2 />
+    <div className="bg-transparent min-h-screen">
+      <HeaderOfCustomer />
       <div className="max-w-7xl mx-auto py-8 px-4">
         <BookingForm selectedRoom={roomData} dates={searchParams} />
       </div>

@@ -102,7 +102,7 @@ export default function Bookingpage({ searchParams }) {
   );
 
   return (
-    <div className="bg-slate-50 min-h-screen py-10 px-4 md:px-8">
+    <div className="bg-transparent min-h-screen py-10 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
         
         {/* HEADER SECTION */}

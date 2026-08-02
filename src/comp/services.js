@@ -73,7 +73,7 @@ export default function Services() {
   ];
 
   return (
-    <div className="bg-slate-50 min-h-screen pb-12">
+    <div className="bg-transparent min-h-screen pb-12">
 
       {/* ✅ Shared Header */}
       <HeaderOfCustomer />

@@ -63,7 +63,7 @@ function Contact() {
   };
 
   return (
-    <div className="bg-white font-sans text-slate-900 antialiased">
+    <div className="bg-transparent font-sans antialiased">
 
       {/* HEADER */}
       <HeaderOfCustomer />

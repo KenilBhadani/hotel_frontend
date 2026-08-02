@@ -1,88 +1,62 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import LoginButton from "./LoginButton";
+import "../Componentcss/index.css";
 
 export default function HeaderOfCustomer() {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 60);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    setIsMenuOpen(false);
+  }, [location.pathname]);
+
+  const toggleMenu = () => setIsMenuOpen((open) => !open);
+  const closeMenu = () => setIsMenuOpen(false);
 
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "About", path: "/aboutpage" },
-    { name: "Contact Us", path: "/contact" },
-    { name: "Booking", path: "/booking" },
+    { name: "Services", path: "/services" },
+    { name: "Explore", path: "/explore" },
+    { name: "Contact", path: "/contact" },
+    { name: "Bookings", path: "/booking" },
   ];
-
-  const isActive = (path) => location.pathname === path;
 
   return (
     <>
-      {/* ================= HEADER ================= */}
-      <header
-        className={`fixed top-0 left-0 w-full h-20 z-50 transition-all duration-300 ${
-          isScrolled
-            ? "bg-white shadow-md border-b border-slate-100"
-            : "bg-black/50 backdrop-blur"
-        }`}
-      >
-        <div className="max-w-7xl mx-auto px-8 h-full flex items-center justify-between">
+      <header className="h-header">
+        <div className="h-nav-container">
+          <div className="h-nav-bar">
+            <div className="h-navbar-logo">
+              <span className="h-logo-icon">👑</span> RoyalPark
+            </div>
 
-          {/* Logo */}
-          <Link
-            to="/"
-            className={`text-2xl font-bold tracking-[0.25em] ${
-              isScrolled ? "text-slate-900" : "text-white"
-            }`}
-          >
-            ROYAL<span className="text-amber-500">PARK</span>
-          </Link>
+            <div className="h-hamburger" onClick={toggleMenu}>
+              <span className={isMenuOpen ? "h-bar active" : "h-bar"} />
+              <span className={isMenuOpen ? "h-bar active" : "h-bar"} />
+              <span className={isMenuOpen ? "h-bar active" : "h-bar"} />
+            </div>
 
-          {/* Navigation (Desktop + Mobile Same) */}
-          <nav>
-            <ul className="flex items-center gap-10">
+            <ul className={`h-nav-menu ${isMenuOpen ? "active" : ""}`}>
               {navLinks.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.path}
-                    className={`text-[11px] font-bold uppercase tracking-[0.2em] transition-all relative group ${
-                      isScrolled ? "text-slate-600" : "text-white"
-                    } ${
-                      isActive(link.path) ? "text-amber-500" : ""
-                    }`}
-                  >
+                <li key={link.path} className="h-nav-item">
+                  <Link to={link.path} onClick={closeMenu}>
                     {link.name}
-                    <span
-                      className={`absolute -bottom-1 left-0 h-[1px] bg-amber-500 transition-all duration-300 ${
-                        isActive(link.path)
-                          ? "w-full"
-                          : "w-0 group-hover:w-full"
-                      }`}
-                    ></span>
                   </Link>
                 </li>
               ))}
 
-              {/* CTA Button */}
-              <li>
-                <Link
-                  to="/booking"
-                  className="px-6 py-2.5 bg-amber-500 text-white text-[10px] font-black uppercase tracking-[0.25em] hover:bg-slate-900 transition-all duration-300"
-                >
-                  Book Now
-                </Link>
+              <li className="h-nav-item h-mobile-only">
+                <LoginButton isMobile={true} closeMenu={closeMenu} />
               </li>
             </ul>
-          </nav>
+
+            <LoginButton isMobile={false} />
+          </div>
         </div>
       </header>
-
-      {/* Space for Fixed Header */}
-      <div className="pt-20" />
+      <div className="h-header-spacer" />
     </>
   );
 }

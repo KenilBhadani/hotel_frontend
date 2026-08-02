@@ -4,7 +4,7 @@ import hotelVideo from "../images/Luxury_hotel.mp4";
 
 export default function EXPO() {
   return (
-    <div className="bg-white text-slate-800 antialiased">
+    <div className="bg-transparent text-white antialiased">
 
       {/* ================= HEADER ================= */}
       <HeaderOfCustomer />

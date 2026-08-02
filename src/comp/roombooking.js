@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import RoomCard from "./RoomCard";
-import Header2 from "./Header2";
+import HeaderOfCustomer from "./HeaderOfCustomer";
 import Footer from "./footer";
 import { LayoutGrid, AlertCircle, Loader2, Search } from "lucide-react";
 import { toast } from "react-toastify";
@@ -144,7 +144,7 @@ export default function RoomBooking() {
   if (loading) {
     return (
       <>
-        <Header2 />
+        <HeaderOfCustomer />
         <div className="flex flex-col items-center justify-center min-h-screen">
           <Loader2 className="animate-spin text-amber-600 mb-4" size={40} />
           <p className="text-slate-500 font-medium animate-pulse">
@@ -159,7 +159,7 @@ export default function RoomBooking() {
   if (error) {
     return (
       <>
-        <Header2 />
+        <HeaderOfCustomer />
         <div className="max-w-5xl mx-auto p-12 text-center">
           <div className="bg-red-50 text-red-700 p-6 rounded-2xl border">
             <AlertCircle className="mx-auto mb-2" />
@@ -172,9 +172,9 @@ export default function RoomBooking() {
 
   return (
     <>
-      <Header2 />
+      <HeaderOfCustomer />
 
-      <div className="bg-slate-50 min-h-screen py-12 px-6">
+      <div className="bg-transparent min-h-screen py-12 px-6">
         <div className="max-w-5xl mx-auto">
 
           {/* 🔍 SEARCH BAR */}

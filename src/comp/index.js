@@ -4,6 +4,7 @@ import "../Componentcss/index.css";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoginButton from "./LoginButton";
+import HeaderOfCustomer from "./HeaderOfCustomer";
 import { hasTabSession, getTabToken } from "../utils/tabSession";
 
 const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
@@ -108,50 +109,7 @@ function Horosection() {
     <div className="h-hero-container">
       <ToastContainer />
 
-      <header className="h-header">
-        {/* ===== NAVBAR ===== */}
-        <div className="h-nav-container">
-          <div className="h-nav-bar">
-            <div className="h-navbar-logo">
-              <span className="h-logo-icon">👑</span> RoyalPark
-            </div>
-
-            <div className="h-hamburger" onClick={toggleMenu}>
-              <span className={isMenuOpen ? "h-bar active" : "h-bar"} />
-              <span className={isMenuOpen ? "h-bar active" : "h-bar"} />
-              <span className={isMenuOpen ? "h-bar active" : "h-bar"} />
-            </div>
-
-            <ul className={`h-nav-menu ${isMenuOpen ? "active" : ""}`}>
-              <li className="h-nav-item">
-                <Link to="/" onClick={closeMenu}>Home</Link>
-              </li>
-              <li className="h-nav-item">
-                <Link to="/aboutpage" onClick={closeMenu}>About</Link>
-              </li>
-              <li className="h-nav-item">
-                <Link to="/services" onClick={closeMenu}>Services</Link>
-              </li>
-              <li className="h-nav-item">
-                <Link to="/explore" onClick={closeMenu}>Explore</Link>
-              </li>
-              <li className="h-nav-item">
-                <Link to="/contact" onClick={closeMenu}>Contact</Link>
-              </li>
-              <li className="h-nav-item">
-                <Link to="/booking" onClick={closeMenu}>Bookings</Link>
-              </li>
-
-              {/* MOBILE LOGIN */}
-              <li className="h-nav-item h-mobile-only">
-                <LoginButton isMobile={true} closeMenu={closeMenu} />
-              </li>
-            </ul>
-
-            {/* DESKTOP LOGIN */}
-            <LoginButton isMobile={false} />
-          </div>
-        </div>
+      <HeaderOfCustomer />
 
         {/* HERO CONTENT */}
         <div className="h-hero-wrapper">
@@ -227,7 +185,6 @@ function Horosection() {
             </button>
           </form>
         </div>
-      </header>
     </div>
   );
 }

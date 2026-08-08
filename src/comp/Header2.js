@@ -35,7 +35,7 @@ export default function Header2() {
   const idleStyle = "text-white hover:text-blue-400 transition-colors"
 
   return (
-    <header className="bg-gray-900 sticky top-0 z-50 shadow-xl">
+    <header className="bg-black sticky top-0 z-50 shadow-xl">
       <nav aria-label="Global" className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
         
         {/* Logo */}
@@ -93,7 +93,7 @@ export default function Header2() {
       {/* Mobile Menu Slide-over */}
       <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm" />
-        <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 p-6 sm:max-w-sm">
+        <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto p-6 sm:max-w-sm">
           <div className="flex items-center justify-between">
             <span className="text-xl font-bold text-white">Menu</span>
             <button

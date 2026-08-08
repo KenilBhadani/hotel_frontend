@@ -16,11 +16,11 @@ export default function HeaderOfCustomer() {
 
   const navLinks = [
     { name: "Home", path: "/" },
-    { name: "About", path: "/aboutpage" },
+    { name: "Bookings", path: "/booking" },
     { name: "Services", path: "/services" },
     { name: "Explore", path: "/explore" },
     { name: "Contact", path: "/contact" },
-    { name: "Bookings", path: "/booking" },
+    { name: "About", path: "/aboutpage" },
   ];
 
   return (

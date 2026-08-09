@@ -123,37 +123,37 @@ const AdminRoomStatus = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const regenerateInstances = async () => {
-    try {
-      setLoading(true);
-      setError("");
+  // const regenerateInstances = async () => {
+  //   try {
+  //     setLoading(true);
+  //     setError("");
 
-      const token = getTabToken();
+  //     const token = getTabToken();
 
-      const res = await fetch(`${API}/api/admin/rooms/regenerate-instances`, {
-        method: 'POST',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
-        }
-      });
+  //     const res = await fetch(`${API}/api/admin/rooms/regenerate-instances`, {
+  //       method: 'POST',
+  //       credentials: 'include',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         Authorization: `Bearer ${token}`
+  //       }
+  //     });
 
-      if (!res.ok) {
-        const errorData = await res.json().catch(() => ({}));
-        throw new Error(errorData.message || "Failed to generate instances");
-      }
+  //     if (!res.ok) {
+  //       const errorData = await res.json().catch(() => ({}));
+  //       throw new Error(errorData.message || "Failed to generate instances");
+  //     }
 
-      const data = await res.json();
-      alert(data.message);
-      await fetchRooms(); // Reload rooms
-    } catch (err) {
-      console.error("Error regenerating instances:", err);
-      setError(err.message || "Failed to generate room instances");
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     const data = await res.json();
+  //     alert(data.message);
+  //     await fetchRooms(); // Reload rooms
+  //   } catch (err) {
+  //     console.error("Error regenerating instances:", err);
+  //     setError(err.message || "Failed to generate room instances");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   const handleAssign = async () => {
     if (!selectedRoomId || !selectedStaffId) return;

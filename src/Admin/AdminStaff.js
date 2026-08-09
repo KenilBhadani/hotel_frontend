@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Users, UserPlus, Edit, Trash2, Shield,
-  Mail, Phone, Calendar, Search
+  Mail, Calendar, Search
 } from 'lucide-react';
 import { getTabToken } from '../utils/tabSession';
 

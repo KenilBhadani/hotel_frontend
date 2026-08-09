@@ -21,7 +21,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { getTabToken, getTabUser, logoutTab } from "../utils/tabSession";
+import { getTabToken, logoutTab } from "../utils/tabSession";
 
 const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
@@ -76,7 +76,7 @@ function buildTrendSeries(trends, days) {
 
 export function DashboardHome() {
   const [token, setToken] = useState(null);
-  const [tokenReady, setTokenReady] = useState(false);
+  // const [ setTokenReady] = useState(false);
 
   // Initialize token from tab session
   useEffect(() => {

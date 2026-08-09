@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ClipboardList, ChevronLeft, Brush, Wrench, User, CheckCircle2, AlertCircle } from 'lucide-react';
+import { ClipboardList, ChevronLeft, Brush, Wrench, User, AlertCircle } from 'lucide-react';
 import { getTabToken } from '../utils/tabSession';
 
 const API = process.env.REACT_APP_API_URL || "http://localhost:5000";

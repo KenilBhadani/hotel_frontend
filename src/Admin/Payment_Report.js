@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../Admin/Manage_Room.css";
 import {
   ResponsiveContainer,
@@ -26,9 +26,9 @@ function PaymentReports() {
   const [summary, setSummary] = useState(null);
   const [transactions, setTransactions] = useState([]);
   const [distribution, setDistribution] = useState(null);
-  const [distributionBy, setDistributionBy] = useState("amount");
+  const [distributionBy] = useState("amount");
   const [trendSeries, setTrendSeries] = useState([]);
-  const [trendDays, setTrendDays] = useState(30);
+  const [trendDays] = useState(30);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -143,9 +143,9 @@ function PaymentReports() {
 
   /* ================= VERIFY HANDLER ================= */
   // Removed verify button handler as it is no longer used in UI
-  async function handleVerify(id) {
-    // ... kept for reference or if needed later
-  }
+  // async function handleVerify(id) {
+  //   // ... kept for reference or if needed later
+  // }
 
   return (
     <div className="admin-container">

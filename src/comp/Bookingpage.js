@@ -21,11 +21,11 @@ export default function Bookingpage({ searchParams }) {
    */
   const handleSelectRoom = (room) => {
     // Navigates to your specified path with full state
-    navigate("/bookingformpage", { 
-      state: { 
+    navigate("/bookingformpage", {
+      state: {
         selectedRoom: room,
-        bookingDates: searchParams 
-      } 
+        bookingDates: searchParams
+      }
     });
   };
 
@@ -37,9 +37,9 @@ export default function Bookingpage({ searchParams }) {
     try {
       setLoading(true);
       setError(null);
-      
+
       let url = `${API_URL}/api/rooms/available`;
-      
+
       // Construct query string based on search criteria
       if (searchParams?.checkIn) {
         const query = new URLSearchParams({
@@ -52,17 +52,17 @@ export default function Bookingpage({ searchParams }) {
       }
 
       const res = await fetch(url);
-      
+
       if (!res.ok) {
         throw new Error("Could not connect to the room inventory server.");
       }
-      
+
       const data = await res.json();
-      
+
       // Filter out any potential nulls and set rooms
       const validData = Array.isArray(data) ? data.filter(r => r !== null) : [];
       setRooms(validData);
-      
+
     } catch (err) {
       console.error("Fetch Error:", err);
       setError("We're having trouble loading room availability right now.");
@@ -91,7 +91,7 @@ export default function Bookingpage({ searchParams }) {
         <AlertCircle className="mx-auto text-red-500 mb-4" size={40} />
         <h3 className="text-lg font-bold text-red-900 mb-2">Something went wrong</h3>
         <p className="text-red-700 mb-6">{error}</p>
-        <button 
+        <button
           onClick={() => window.location.reload()}
           className="bg-red-900 text-white px-8 py-3 rounded-xl font-bold hover:bg-red-800 transition-colors"
         >
@@ -104,7 +104,7 @@ export default function Bookingpage({ searchParams }) {
   return (
     <div className="bg-transparent min-h-screen py-10 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
-        
+
         {/* HEADER SECTION */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
           <div>
@@ -129,7 +129,7 @@ export default function Bookingpage({ searchParams }) {
               <div>
                 <p className="text-[10px] font-bold text-slate-400 uppercase leading-none mb-1">Your Selection</p>
                 <p className="text-sm font-bold text-slate-800">
-                  {new Date(searchParams.checkIn).toLocaleDateString('en-IN', {day: 'numeric', month: 'short'})} — {new Date(searchParams.checkOut).toLocaleDateString('en-IN', {day: 'numeric', month: 'short'})}
+                  {new Date(searchParams.checkIn).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })} — {new Date(searchParams.checkOut).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}
                   <span className="text-slate-300 mx-2">|</span>
                   {searchParams.guests || '1'} Guests
                 </p>
@@ -139,7 +139,7 @@ export default function Bookingpage({ searchParams }) {
         </div>
 
         {/* ROOM LISTING GRID */}
-        
+
         <div className="flex flex-col gap-2">
           {rooms.length === 0 ? (
             <div className="text-center py-32 bg-white rounded-[2.5rem] border-2 border-dashed border-slate-200">

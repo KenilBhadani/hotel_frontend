@@ -83,7 +83,7 @@ export function DashboardHome() {
     const initToken = () => {
       const t = getTabToken();
       setToken(t);
-      setTokenReady(true);
+      // setTokenReady(true);
     };
     initToken();
   }, []);

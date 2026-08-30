@@ -23,13 +23,7 @@ const BookingManagement = () => {
   const token = getTabToken();
   const isAuthorized = user && user.role === 'Receptionist';
 
-  useEffect(() => {
-    if (isAuthorized) {
-      fetchBookings();
-    } else {
-      setLoading(false);
-    }
-  }, [isAuthorized, fetchBookings]);
+
 
   const fetchBookings = useCallback(async () => {
     try {
@@ -48,6 +42,14 @@ const BookingManagement = () => {
       setLoading(false);
     }
   }, [token]);
+
+  useEffect(() => {
+    if (isAuthorized) {
+      fetchBookings();
+    } else {
+      setLoading(false);
+    }
+  }, [isAuthorized, fetchBookings]);
 
   // Filter bookings
   const filteredBookings = useMemo(() => {

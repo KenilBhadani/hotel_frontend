@@ -14,16 +14,7 @@ const HousekeepingPanel = () => {
   const user = JSON.parse(localStorage.getItem('staffUser') || 'null');
   const isAuthorized = user && user.role === 'Housekeeping';
 
-  // ✅ Hooks ALWAYS run
-  useEffect(() => {
-    if (isAuthorized) {
-      fetchRooms();
-      fetchTasks();
-    } else {
-      setLoading(false);
-      setTasksLoading(false);
-    }
-  }, [isAuthorized, fetchRooms, fetchTasks]);
+
 
   const fetchTasks = useCallback(async () => {
     try {
@@ -88,6 +79,17 @@ const HousekeepingPanel = () => {
       setLoading(false);
     }
   }, [user?._id, user?.userId, user?.id]);
+
+  // ✅ Hooks ALWAYS run
+  useEffect(() => {
+    if (isAuthorized) {
+      fetchRooms();
+      fetchTasks();
+    } else {
+      setLoading(false);
+      setTasksLoading(false);
+    }
+  }, [isAuthorized, fetchRooms, fetchTasks]);
 
   const updateRoomStatus = async (roomId, status) => {
     try {

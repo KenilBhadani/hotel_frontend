@@ -17,11 +17,7 @@ const RoomStatus = () => {
   const defaultFilter = user?.role === 'Housekeeping' ? 'Cleaning' : 'All';
   const [filter, setFilter] = useState(defaultFilter);
 
-  // ✅ Hooks ALWAYS run
-  useEffect(() => {
-    if (isAuthorized) fetchRooms();
-    else setLoading(false);
-  }, [isAuthorized, fetchRooms]);
+
 
   const fetchRooms = useCallback(async () => {
     try {
@@ -41,6 +37,12 @@ const RoomStatus = () => {
       setLoading(false);
     }
   }, []);
+
+  // ✅ Hooks ALWAYS run
+  useEffect(() => {
+    if (isAuthorized) fetchRooms();
+    else setLoading(false);
+  }, [isAuthorized, fetchRooms]);
 
   // ✅ Safe memo
   const filteredRooms = useMemo(() => {

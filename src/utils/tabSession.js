@@ -161,12 +161,13 @@ const setTabSession = (type, token, user) => {
             localStorage.setItem('staffToken', token);
             localStorage.setItem('staffUser', JSON.stringify(user));
             break;
+        default:
+            break;
     }
 };
 
 // Logout from current tab
 const logoutTab = () => {
-    const sessionType = getTabSessionType();
 
     // Clear sessionStorage (tab-specific)
     clearTabSession();
@@ -216,6 +217,8 @@ const initializeTabSession = (preferredType = null) => {
             case SESSION_TYPES.STAFF:
                 token = localStorage.getItem('staffToken');
                 user = localStorage.getItem('staffUser');
+                break;
+            default:
                 break;
         }
 

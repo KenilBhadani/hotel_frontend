@@ -14,15 +14,7 @@ const MaintenancePanel = () => {
   const user = JSON.parse(localStorage.getItem('staffUser') || 'null');
   const isAuthorized = user && user.role === 'Maintenance';
 
-  useEffect(() => {
-    if (isAuthorized) {
-      fetchRooms();
-      fetchTasks();
-    } else {
-      setLoading(false);
-      setTasksLoading(false);
-    }
-  }, [isAuthorized, fetchRooms, fetchTasks]);
+
 
   const fetchTasks = useCallback(async () => {
     try {
@@ -82,6 +74,16 @@ const MaintenancePanel = () => {
       setLoading(false);
     }
   }, [user?._id, user?.userId, user?.id]);
+
+  useEffect(() => {
+    if (isAuthorized) {
+      fetchRooms();
+      fetchTasks();
+    } else {
+      setLoading(false);
+      setTasksLoading(false);
+    }
+  }, [isAuthorized, fetchRooms, fetchTasks]);
 
   const updateRoomStatus = async (roomId, status) => {
     try {

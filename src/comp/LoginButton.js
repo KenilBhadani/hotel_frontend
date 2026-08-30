@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { getTabToken, getTabUser, logoutTab, hasTabSession } from "../utils/tabSession";
+import { getTabToken, logoutTab, hasTabSession } from "../utils/tabSession";
 
 function LoginButton({ isMobile = false, closeMenu }) {
   const navigate = useNavigate();

@@ -15,9 +15,7 @@ function ManageBookings() {
 
   const mainRef = useRef(null);
 
-  useEffect(() => {
-    fetchBookings();
-  }, [fetchBookings]);
+
 
   const fetchBookings = useCallback(async () => {
     try {
@@ -52,6 +50,10 @@ function ManageBookings() {
       setLoading(false);
     }
   }, [token]);
+
+  useEffect(() => {
+    fetchBookings();
+  }, [fetchBookings]);
 
   // Debounced search
   useEffect(() => {

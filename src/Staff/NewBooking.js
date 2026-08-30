@@ -44,12 +44,7 @@ const NewBooking = () => {
     }
   }, []);
 
-  // Fetch available rooms when dates change
-  useEffect(() => {
-    if (isAuthorized && formData.checkIn && formData.checkOut) {
-      fetchAvailableRooms();
-    }
-  }, [formData.checkIn, formData.checkOut, isAuthorized, fetchAvailableRooms]);
+
 
   const fetchAvailableRooms = useCallback(async () => {
     try {
@@ -72,6 +67,13 @@ const NewBooking = () => {
       console.error('Failed to fetch available rooms:', err);
     }
   }, [formData.checkIn, formData.checkOut]);
+
+  // Fetch available rooms when dates change
+  useEffect(() => {
+    if (isAuthorized && formData.checkIn && formData.checkOut) {
+      fetchAvailableRooms();
+    }
+  }, [formData.checkIn, formData.checkOut, isAuthorized, fetchAvailableRooms]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

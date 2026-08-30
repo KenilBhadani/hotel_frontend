@@ -18,13 +18,7 @@ const SystemStatus = () => {
   const user = JSON.parse(localStorage.getItem('staffUser') || 'null');
   const isAuthorized = user && user.role === 'Manager';
 
-  useEffect(() => {
-    if (isAuthorized) {
-      fetchSystemStatus();
-    } else {
-      setLoading(false);
-    }
-  }, [isAuthorized, fetchSystemStatus]);
+
 
   const fetchSystemStatus = useCallback(async () => {
     try {
@@ -63,6 +57,14 @@ const SystemStatus = () => {
       setLoading(false);
     }
   }, []);
+
+  useEffect(() => {
+    if (isAuthorized) {
+      fetchSystemStatus();
+    } else {
+      setLoading(false);
+    }
+  }, [isAuthorized, fetchSystemStatus]);
 
   const generateAlerts = (panel, rooms, bookings) => {
     const newAlerts = [];

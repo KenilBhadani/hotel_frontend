@@ -7,9 +7,7 @@ import {
   CheckCircle2,
   Maximize2,
   Wifi,
-  Coffee,
-  Tv,
-  Wind,
+
   ChevronDown,
   ChevronUp,
   Info,
@@ -51,7 +49,7 @@ const RoomCard = ({ room, onSelect, checkIn, checkOut }) => {
       ? availableRooms <= 0
       : false;
 
-  const isAvailable = !isSoldOut;
+
 
   /* ================= IMAGE HELPERS ================= */
   const getImageUrl = (imagePath) => {

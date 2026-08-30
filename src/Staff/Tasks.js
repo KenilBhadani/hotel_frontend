@@ -20,7 +20,7 @@ const Tasks = () => {
   // Create Task modal state
   const [showCreate, setShowCreate] = useState(false);
   const [form, setForm] = useState({ title: '', description: '', priority: 'Medium', category: 'Housekeeping', assignedTo: '', roomId: '', location: '', dueDate: '', tags: '' });
-  const [staffList, setStaffList] = useState([]);
+
   const [roomList, setRoomList] = useState([]);
   const [creating, setCreating] = useState(false);
   const [createError, setCreateError] = useState('');
@@ -39,9 +39,7 @@ const Tasks = () => {
         ]);
 
         if (staffRes.ok) {
-          const staffData = await staffRes.json();
-          const list = Array.isArray(staffData) ? staffData : (staffData.staff || []);
-          setStaffList(list);
+          // staff list fetch was here but is unused.
         }
 
         if (roomsRes.ok) {

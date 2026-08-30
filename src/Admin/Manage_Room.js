@@ -82,11 +82,7 @@ function ManageRoom() {
     "Room Service"
   ];
 
-  useEffect(() => {
-    if (didFetch.current) return;
-    didFetch.current = true;
-    fetchRooms();
-  }, [fetchRooms]);
+
 
   // focus the title input when add form opens and scroll to top
   useEffect(() => {
@@ -126,6 +122,12 @@ function ManageRoom() {
       setLoading(false);
     }
   }, [token]);
+
+  useEffect(() => {
+    if (didFetch.current) return;
+    didFetch.current = true;
+    fetchRooms();
+  }, [fetchRooms]);
 
   function handleChange(e) {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));

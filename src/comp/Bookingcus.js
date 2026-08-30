@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, useCallback } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import { Users, ShieldCheck, ArrowRight } from "lucide-react";
@@ -52,17 +52,17 @@ export default function BookingForm() {
     setForm((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
   }
 
-  const normalizeEmail = (value) => String(value || "").trim().toLowerCase();
+  const normalizeEmail = useCallback((value) => String(value || "").trim().toLowerCase(), []);
 
-  const checkMembershipByEmail = (value) => {
+  const checkMembershipByEmail = useCallback((value) => {
     const normalized = normalizeEmail(value);
     if (!normalized) return false;
     const loyaltyEmail = normalizeEmail(localStorage.getItem("loyaltyEmail"));
     const paidFlag = localStorage.getItem(`membership_paid_${normalized}`) === "true";
     return loyaltyEmail === normalized && paidFlag;
-  };
+  }, [normalizeEmail]);
 
-  const checkMembershipFromServer = async (value) => {
+  const checkMembershipFromServer = useCallback(async (value) => {
     const normalized = normalizeEmail(value);
     if (!normalized) return false;
     const res = await fetch(
@@ -71,7 +71,7 @@ export default function BookingForm() {
     const data = await res.json().catch(() => ({}));
     if (!res.ok) return false;
     return Boolean(data?.active);
-  };
+  }, [API_URL, normalizeEmail]);
 
   useEffect(() => {
     if (location.state?.room && location.state?.searchParams) {
@@ -145,7 +145,7 @@ export default function BookingForm() {
     return () => {
       active = false;
     };
-  }, [form.email]);
+  }, [form.email, checkMembershipFromServer, checkMembershipByEmail]);
 
   const { nights, checkInDate, checkOutDate } = useMemo(() => {
     if (!searchParams) return { nights: 0, checkInDate: null, checkOutDate: null };

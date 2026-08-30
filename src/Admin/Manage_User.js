@@ -17,9 +17,7 @@ function ManageUser() {
 
   const token = getTabToken();
 
-  useEffect(() => {
-    fetchUsers();
-  }, [fetchUsers]);
+
 
   const fetchUsers = useCallback(async () => {
     try {
@@ -38,6 +36,10 @@ function ManageUser() {
       setLoading(false);
     }
   }, [token]);
+
+  useEffect(() => {
+    fetchUsers();
+  }, [fetchUsers]);
 
   function handleSearch() {
     setQuery(search);

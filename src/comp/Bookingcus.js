@@ -145,7 +145,7 @@ export default function BookingForm() {
     return () => {
       active = false;
     };
-  }, [form.email, checkMembershipFromServer, checkMembershipByEmail]);
+  }, [form.email, checkMembershipFromServer, checkMembershipByEmail, normalizeEmail]);
 
   const { nights, checkInDate, checkOutDate } = useMemo(() => {
     if (!searchParams) return { nights: 0, checkInDate: null, checkOutDate: null };

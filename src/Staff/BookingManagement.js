@@ -1,9 +1,9 @@
 // src/Staff/BookingManagement.js
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import {
   LayoutDashboard, CalendarCheck, UserCheck, UserX,
-  Search, Edit, CheckCircle, XCircle,
+  Search, CheckCircle, XCircle,
   Plus, Eye, Phone, Mail
 } from 'lucide-react';
 import { getTabToken, getTabUser } from '../utils/tabSession';
@@ -29,9 +29,9 @@ const BookingManagement = () => {
     } else {
       setLoading(false);
     }
-  }, [isAuthorized]);
+  }, [isAuthorized, fetchBookings]);
 
-  const fetchBookings = async () => {
+  const fetchBookings = useCallback(async () => {
     try {
       setLoading(true);
       const res = await fetch(`${API}/api/staff/bookings`, {
@@ -47,7 +47,7 @@ const BookingManagement = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [token]);
 
   // Filter bookings
   const filteredBookings = useMemo(() => {

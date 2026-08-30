@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard, BedDouble, CalendarCheck,
-  Users, ClipboardList, BarChart3, LogOut, Search, Bell, Menu, X, Sparkles, Wrench
+  Users, ClipboardList, LogOut, Bell, Menu, X, Sparkles, Wrench
 } from 'lucide-react';
 import { getTabToken, getTabUser, logoutTab } from '../utils/tabSession';
 
@@ -135,6 +135,7 @@ const StaffLayout = () => {
     fetchPanelAndBuildNotifications();
     const id = setInterval(fetchPanelAndBuildNotifications, 60000);
     return () => { active = false; clearInterval(id); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user?.role, API]);
 
   return (

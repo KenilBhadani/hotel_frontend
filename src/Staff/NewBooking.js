@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import {
   Calendar, User, BedDouble, CheckCircle, ArrowLeft
@@ -49,9 +49,9 @@ const NewBooking = () => {
     if (isAuthorized && formData.checkIn && formData.checkOut) {
       fetchAvailableRooms();
     }
-  }, [formData.checkIn, formData.checkOut, isAuthorized]);
+  }, [formData.checkIn, formData.checkOut, isAuthorized, fetchAvailableRooms]);
 
-  const fetchAvailableRooms = async () => {
+  const fetchAvailableRooms = useCallback(async () => {
     try {
       console.log('Fetching rooms for:', formData.checkIn, 'to', formData.checkOut);
       const res = await fetch(
@@ -71,7 +71,7 @@ const NewBooking = () => {
     } catch (err) {
       console.error('Failed to fetch available rooms:', err);
     }
-  };
+  }, [formData.checkIn, formData.checkOut]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

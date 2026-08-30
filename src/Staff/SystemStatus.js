@@ -1,5 +1,5 @@
 // src/Staff/SystemStatus.js - System-wide status overview for Receptionists
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import {
   LayoutDashboard, AlertTriangle, CheckCircle, XCircle,
@@ -24,9 +24,9 @@ const SystemStatus = () => {
     } else {
       setLoading(false);
     }
-  }, [isAuthorized]);
+  }, [isAuthorized, fetchSystemStatus]);
 
-  const fetchSystemStatus = async () => {
+  const fetchSystemStatus = useCallback(async () => {
     try {
       setLoading(true);
 
@@ -62,7 +62,7 @@ const SystemStatus = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   const generateAlerts = (panel, rooms, bookings) => {
     const newAlerts = [];

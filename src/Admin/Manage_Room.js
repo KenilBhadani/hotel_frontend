@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import "../Admin/Manage_Room.css";
 import { getTabToken } from "../utils/tabSession";
 
@@ -86,7 +86,7 @@ function ManageRoom() {
     if (didFetch.current) return;
     didFetch.current = true;
     fetchRooms();
-  }, []);
+  }, [fetchRooms]);
 
   // focus the title input when add form opens and scroll to top
   useEffect(() => {
@@ -99,7 +99,7 @@ function ManageRoom() {
     }
   }, [showForm]);
 
-  async function fetchRooms() {
+  const fetchRooms = useCallback(async () => {
     try {
       setLoading(true);
       setError("");
@@ -125,7 +125,7 @@ function ManageRoom() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [token]);
 
   function handleChange(e) {
     setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));

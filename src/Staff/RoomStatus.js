@@ -1,7 +1,7 @@
 // src/Staff/RoomStatus.js
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { Link } from 'react-router-dom';
-import { Bed, CheckCircle2, Brush, ChevronLeft, Wrench } from 'lucide-react';
+import { Bed, CheckCircle2, Brush, ChevronLeft } from 'lucide-react';
 
 const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
 
@@ -12,7 +12,6 @@ const RoomStatus = () => {
   // 🔐 Authorization (NO early return)
   const user = JSON.parse(localStorage.getItem('staffUser') || 'null');
   const isAuthorized = user && ['Housekeeping', 'Receptionist'].includes(user.role);
-  const isReadOnly = user?.role === 'Receptionist';
 
   // Default filter based on role
   const defaultFilter = user?.role === 'Housekeeping' ? 'Cleaning' : 'All';
@@ -22,9 +21,9 @@ const RoomStatus = () => {
   useEffect(() => {
     if (isAuthorized) fetchRooms();
     else setLoading(false);
-  }, [isAuthorized]);
+  }, [isAuthorized, fetchRooms]);
 
-  const fetchRooms = async () => {
+  const fetchRooms = useCallback(async () => {
     try {
       setLoading(true);
       const res = await fetch(`${API}/api/staff/rooms/instances`, {
@@ -41,7 +40,7 @@ const RoomStatus = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   // ✅ Safe memo
   const filteredRooms = useMemo(() => {

@@ -1,5 +1,5 @@
 // src/Staff/MaintenancePanel.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Wrench, CheckCircle2, AlertTriangle, RefreshCw } from 'lucide-react';
 
 const API = process.env.REACT_APP_API_URL || "http://localhost:5000";
@@ -22,9 +22,9 @@ const MaintenancePanel = () => {
       setLoading(false);
       setTasksLoading(false);
     }
-  }, [isAuthorized]);
+  }, [isAuthorized, fetchRooms, fetchTasks]);
 
-  const fetchTasks = async () => {
+  const fetchTasks = useCallback(async () => {
     try {
       const res = await fetch(`${API}/api/staff/tasks`, {
         headers: {
@@ -44,7 +44,7 @@ const MaintenancePanel = () => {
     } finally {
       setTasksLoading(false);
     }
-  };
+  }, []);
 
   const markTaskComplete = async (taskId) => {
     try {
@@ -60,7 +60,7 @@ const MaintenancePanel = () => {
     }
   };
 
-  const fetchRooms = async () => {
+  const fetchRooms = useCallback(async () => {
     try {
       const res = await fetch(`${API}/api/staff/rooms/instances`, {
         headers: {
@@ -81,7 +81,7 @@ const MaintenancePanel = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [user?._id, user?.userId, user?.id]);
 
   const updateRoomStatus = async (roomId, status) => {
     try {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import "../Admin/Manage_User.css";
 import { getTabToken } from "../utils/tabSession";
 
@@ -19,9 +19,9 @@ function ManageUser() {
 
   useEffect(() => {
     fetchUsers();
-  }, []);
+  }, [fetchUsers]);
 
-  async function fetchUsers() {
+  const fetchUsers = useCallback(async () => {
     try {
       setLoading(true);
       const res = await fetch(`${API}/api/admin/users`, {
@@ -37,7 +37,7 @@ function ManageUser() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [token]);
 
   function handleSearch() {
     setQuery(search);

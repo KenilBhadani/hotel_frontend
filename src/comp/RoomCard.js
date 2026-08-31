@@ -54,7 +54,7 @@ const RoomCard = ({ room, onSelect, checkIn, checkOut }) => {
   /* ================= IMAGE HELPERS ================= */
   const getImageUrl = (imagePath) => {
     if (!imagePath)
-      return "https://via.placeholder.com/400x300?text=No+Image";
+      return "https://placehold.co/400x300?text=No+Image";
     return imagePath.startsWith("http")
       ? imagePath
       : `${BASE_URL}/${imagePath.replace(/^\//, "")}`;

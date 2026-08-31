@@ -9,8 +9,7 @@ import {
   ShieldCheck,
   Hotel,
 } from "lucide-react";
-
-const API_URL = "http://127.0.0.1:5000";
+const API_URL = process.env.REACT_APP_API_URL?.replace(/\/$/, "") || "http://localhost:5000";
 
 /* =========================
    ROOM CARD COMPONENT
@@ -29,7 +28,7 @@ const RoomCard = ({ room }) => {
 
   const getImageUrl = (imagePath) => {
     if (!imagePath)
-      return "https://via.placeholder.com/400x300?text=No+Image";
+      return "https://placehold.co/400x300?text=No+Image";
     return imagePath.startsWith("http")
       ? imagePath
       : `${API_URL}/${imagePath.replace(/^\//, "")}`;

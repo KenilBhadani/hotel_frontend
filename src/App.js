@@ -6,6 +6,7 @@ import { loadStripe } from "@stripe/stripe-js";
 
 // ===== TAB SESSION =====
 import { getTabToken, getTabUser, initializeTabSession, setTabSession, SESSION_TYPES } from "./utils/tabSession";
+import Chatbot from "./comp/Chatbot";
 
 // ===== AUTH =====
 const Register = lazy(() => import("./comp/Registration"));
@@ -278,101 +279,104 @@ function App() {
   };
 
   return (
-    <Suspense fallback={<AppLoader />}>
-      <Routes>
-        {/* ===== PUBLIC ===== */}
-        <Route
-          path="/"
-          element={
-            <>
-              <Herosection />
-              <AboutUs />
-              <Rooms />
-              <Middle />
-              <Small />
-              <Events />
+    <>
+      <Suspense fallback={<AppLoader />}>
+        <Routes>
+          {/* ===== PUBLIC ===== */}
+          <Route
+            path="/"
+            element={
+              <>
+                <Herosection />
+                <AboutUs />
+                <Rooms />
+                <Middle />
+                <Small />
+                <Events />
+                <StripeWrapper>
+                  <LoyaltyHero />
+                </StripeWrapper>
+                <Footer />
+              </>
+            }
+          />
+
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/aboutpage" element={<AboutPage />} />
+          <Route path="/explore" element={<EXPO />} />
+          <Route path="/services" element={<Services />} />
+
+          {/* ===== BOOKING ===== */}
+          <Route path="/booking" element={<RoomBooking />} />
+          <Route path="/bookings" element={<Mybooking />} />
+          <Route
+            path="/booking/form"
+            element={
               <StripeWrapper>
-                <LoyaltyHero />
+                <BookingForm />
               </StripeWrapper>
-              <Footer />
-            </>
-          }
-        />
+            }
+          />
 
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/aboutpage" element={<AboutPage />} />
-        <Route path="/explore" element={<EXPO />} />
-        <Route path="/services" element={<Services />} />
+          {/* ===== AUTH ===== */}
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/login/staff" element={<SLogin />} />
+          <Route path="/reset-password" element={<ResetPassword />} />
+          <Route path="/oauth-success" element={<OAuthSuccess />} />
 
-        {/* ===== BOOKING ===== */}
-        <Route path="/booking" element={<RoomBooking />} />
-        <Route path="/bookings" element={<Mybooking />} />
-        <Route
-          path="/booking/form"
-          element={
-            <StripeWrapper>
-              <BookingForm />
-            </StripeWrapper>
-          }
-        />
+          {/* ===== ADMIN ===== */}
+          <Route
+            path="/admin"
+            element={
+              <AdminRoute>
+                <Dashboard />
+              </AdminRoute>
+            }
+          >
+            <Route index element={<DashboardHome />} />
+            <Route path="manage-booking" element={<ManageBookings />} />
+            <Route path="manage-room" element={<ManageRoom />} />
+            <Route path="manage-user" element={<ManageUser />} />
+            <Route path="manage-payment" element={<PaymentReports />} />
+            <Route path="dashboard-stats" element={<DashboardStats />} />
+            <Route path="manage-staff" element={<AdminStaff />} />
+            <Route path="room-status" element={<AdminRoomStatus />} />
+            <Route path="tasks" element={<AdminTasks />} />
+          </Route>
 
-        {/* ===== AUTH ===== */}
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/login/staff" element={<SLogin />} />
-        <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/oauth-success" element={<OAuthSuccess />} />
+          {/* ===== STAFF ===== */}
+          <Route
+            path="/staff"
+            element={
+              <StaffRoute>
+                <StaffLayout />
+              </StaffRoute>
+            }
+          >
+            <Route index element={<StaffDashboard />} />
+            <Route path="dashboard" element={<StaffDashboard />} />
+            <Route path="panel" element={<StaffDashboard />} />
+            <Route path="receptionist" element={<ReceptionistDashboard />} />
+            <Route path="system-status" element={<SystemStatus />} />
+            <Route path="bookings" element={<BookingManagement />} />
+            <Route path="bookings/new" element={<NewBooking />} />
+            <Route path="booking-management" element={<BookingManagement />} />
+            <Route path="checkinout" element={<CheckInOut />} />
+            <Route path="guests" element={<Guests />} />
+            <Route path="rooms" element={<RoomStatus />} />
+            <Route path="housekeeping" element={<HousekeepingPanel />} />
+            <Route path="maintenance" element={<MaintenancePanel />} />
+            <Route path="tasks" element={<Tasks />} />
+            <Route path="reports" element={<Reports />} />
+          </Route>
 
-        {/* ===== ADMIN ===== */}
-        <Route
-          path="/admin"
-          element={
-            <AdminRoute>
-              <Dashboard />
-            </AdminRoute>
-          }
-        >
-          <Route index element={<DashboardHome />} />
-          <Route path="manage-booking" element={<ManageBookings />} />
-          <Route path="manage-room" element={<ManageRoom />} />
-          <Route path="manage-user" element={<ManageUser />} />
-          <Route path="manage-payment" element={<PaymentReports />} />
-          <Route path="dashboard-stats" element={<DashboardStats />} />
-          <Route path="manage-staff" element={<AdminStaff />} />
-          <Route path="room-status" element={<AdminRoomStatus />} />
-          <Route path="tasks" element={<AdminTasks />} />
-        </Route>
-
-        {/* ===== STAFF ===== */}
-        <Route
-          path="/staff"
-          element={
-            <StaffRoute>
-              <StaffLayout />
-            </StaffRoute>
-          }
-        >
-          <Route index element={<StaffDashboard />} />
-          <Route path="dashboard" element={<StaffDashboard />} />
-          <Route path="panel" element={<StaffDashboard />} />
-          <Route path="receptionist" element={<ReceptionistDashboard />} />
-          <Route path="system-status" element={<SystemStatus />} />
-          <Route path="bookings" element={<BookingManagement />} />
-          <Route path="bookings/new" element={<NewBooking />} />
-          <Route path="booking-management" element={<BookingManagement />} />
-          <Route path="checkinout" element={<CheckInOut />} />
-          <Route path="guests" element={<Guests />} />
-          <Route path="rooms" element={<RoomStatus />} />
-          <Route path="housekeeping" element={<HousekeepingPanel />} />
-          <Route path="maintenance" element={<MaintenancePanel />} />
-          <Route path="tasks" element={<Tasks />} />
-          <Route path="reports" element={<Reports />} />
-        </Route>
-
-        {/* ===== FALLBACK ===== */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Suspense>
+          {/* ===== FALLBACK ===== */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Suspense>
+      <Chatbot />
+    </>
   );
 }
 

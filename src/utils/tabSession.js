@@ -20,14 +20,48 @@ const SESSION_TYPES = {
     STAFF: 'staff'
 };
 
-// Validate if token is a valid JWT (not "session" string or other invalid values)
+// Clean a token by removing quotes, Bearer prefix, and extraneous whitespace
+const sanitizeToken = (token) => {
+    if (!token || typeof token !== 'string') return null;
+    let clean = token.trim();
+    while (clean.toLowerCase().startsWith('bearer ')) {
+        clean = clean.slice(7).trim();
+    }
+    if ((clean.startsWith('"') && clean.endsWith('"')) || (clean.startsWith("'") && clean.endsWith("'"))) {
+        clean = clean.slice(1, -1).trim();
+    }
+    return clean;
+};
+
+// Validate if token is a valid JWT (not "session" string or other invalid values) and not expired
 const isValidToken = (token) => {
     if (!token || typeof token !== 'string') return false;
-    // JWT tokens have 3 parts separated by dots and are longer than 20 chars
-    if (token === 'session' || token.length < 20) return false;
-    // Basic JWT format check (should have 2 dots)
-    const parts = token.split('.');
-    return parts.length === 3;
+    const clean = sanitizeToken(token);
+    if (!clean || clean === 'session' || clean === 'null' || clean === 'undefined' || clean.length < 20) return false;
+
+    // Basic JWT format check: exactly 3 parts separated by dots
+    const parts = clean.split('.');
+    if (parts.length !== 3) return false;
+
+    // Validate that each part consists only of base64url characters
+    const base64UrlPattern = /^[A-Za-z0-9_-]+$/;
+    if (!base64UrlPattern.test(parts[0]) || !base64UrlPattern.test(parts[1]) || !base64UrlPattern.test(parts[2])) {
+        return false;
+    }
+
+    // Check expiration if payload can be decoded
+    try {
+        const payloadBase64 = parts[1].replace(/-/g, '+').replace(/_/g, '/');
+        const payload = JSON.parse(atob(payloadBase64));
+        if (payload.exp && Date.now() >= payload.exp * 1000) {
+            return false;
+        }
+    } catch {
+        // If decoding fails, consider token invalid
+        return false;
+    }
+
+    return true;
 };
 
 // Clean up invalid tokens from localStorage
@@ -291,5 +325,6 @@ export {
     isLoggedIn,
     getSessionInfo,
     isValidToken,
+    sanitizeToken,
     cleanupInvalidTokens
 };

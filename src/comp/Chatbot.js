@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../Componentcss/Chatbot.css';
+import { getTabToken, isValidToken, sanitizeToken } from '../utils/tabSession';
 // Actually, let's use standard unicode characters or simple SVGs just in case the icon library is not installed or missing these icons.
 
 const Chatbot = () => {
@@ -35,10 +36,23 @@ const Chatbot = () => {
         setIsLoading(true);
 
         try {
+            const rawToken = getTabToken() || localStorage.getItem('token');
+            const token = isValidToken(rawToken) ? sanitizeToken(rawToken) : null;
+
+            // If there was an invalid or expired token in storage, clean it up completely
+            if (rawToken && !token) {
+                localStorage.removeItem('token');
+                localStorage.removeItem('user');
+                sessionStorage.removeItem('token');
+                sessionStorage.removeItem('user');
+            }
+
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/chatbot`, {
                 method: 'POST',
+                credentials: 'include',
                 headers: {
                     'Content-Type': 'application/json',
+                    ...(token ? { Authorization: `Bearer ${token}` } : {}),
                 },
                 body: JSON.stringify({ message: userMessage }),
             });
@@ -48,6 +62,10 @@ const Chatbot = () => {
             if (response.ok) {
                 setMessages(prev => [...prev, { sender: 'bot', text: data.reply }]);
             } else {
+                if (response.status === 401) {
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('user');
+                }
                 setMessages(prev => [...prev, { sender: 'bot', text: 'Sorry, I am having trouble connecting to the server. ' + (data.error || '') }]);
             }
         } catch (error) {

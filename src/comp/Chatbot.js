@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import '../Componentcss/Chatbot.css';
 import { getTabToken, isValidToken, sanitizeToken } from '../utils/tabSession';
-// Actually, let's use standard unicode characters or simple SVGs just in case the icon library is not installed or missing these icons.
 
 const Chatbot = () => {
     const [isOpen, setIsOpen] = useState(false);
@@ -28,10 +27,11 @@ const Chatbot = () => {
 
     const handleSend = async (e) => {
         e.preventDefault();
-        if (!input.trim()) return;
+        if (!input.trim() || isLoading) return;
 
         const userMessage = input.trim();
-        setMessages(prev => [...prev, { sender: 'user', text: userMessage }]);
+        const updatedMessages = [...messages, { sender: 'user', text: userMessage }];
+        setMessages(updatedMessages);
         setInput('');
         setIsLoading(true);
 
@@ -39,13 +39,21 @@ const Chatbot = () => {
             const rawToken = getTabToken() || localStorage.getItem('token');
             const token = isValidToken(rawToken) ? sanitizeToken(rawToken) : null;
 
-            // If there was an invalid or expired token in storage, clean it up completely
             if (rawToken && !token) {
                 localStorage.removeItem('token');
                 localStorage.removeItem('user');
                 sessionStorage.removeItem('token');
                 sessionStorage.removeItem('user');
             }
+
+            // Include last 8 conversational turns so the chatbot has full context and memory
+            const historyPayload = messages
+                .filter(m => m.text)
+                .slice(-8)
+                .map(m => ({
+                    role: m.sender === 'user' ? 'user' : 'assistant',
+                    content: m.text
+                }));
 
             const response = await fetch(`${process.env.REACT_APP_API_URL}/api/chatbot`, {
                 method: 'POST',
@@ -54,7 +62,10 @@ const Chatbot = () => {
                     'Content-Type': 'application/json',
                     ...(token ? { Authorization: `Bearer ${token}` } : {}),
                 },
-                body: JSON.stringify({ message: userMessage }),
+                body: JSON.stringify({
+                    message: userMessage,
+                    history: historyPayload
+                }),
             });
 
             const data = await response.json();
@@ -76,6 +87,49 @@ const Chatbot = () => {
         }
     };
 
+    // Helper to render markdown bolding (**bold**) and bullet lists nicely without raw asterisks
+    const renderMessageContent = (text) => {
+        if (!text) return null;
+
+        const lines = text.split('\n');
+
+        return lines.map((line, lineIdx) => {
+            let cleanLine = line;
+            let isBullet = false;
+
+            // Detect list items like "* ", "- ", "1. "
+            if (/^\s*[*•-]\s+/.test(cleanLine)) {
+                isBullet = true;
+                cleanLine = cleanLine.replace(/^\s*[*•-]\s+/, '');
+            }
+
+            // Clean any stray excessive asterisks like ****
+            cleanLine = cleanLine.replace(/\*{3,}/g, '**');
+
+            // Parse **bold text**
+            const parts = cleanLine.split(/(\*\*[^*]+\*\*)/g);
+
+            return (
+                <div
+                    key={lineIdx}
+                    style={{
+                        paddingLeft: isBullet ? '12px' : '0',
+                        margin: cleanLine.trim() === '' ? '4px 0' : '2px 0',
+                        display: 'block'
+                    }}
+                >
+                    {isBullet && <span style={{ marginRight: '6px', color: '#D4AF37' }}>•</span>}
+                    {parts.map((part, partIdx) => {
+                        if (part.startsWith('**') && part.endsWith('**')) {
+                            return <strong key={partIdx}>{part.slice(2, -2)}</strong>;
+                        }
+                        return part;
+                    })}
+                </div>
+            );
+        });
+    };
+
     return (
         <div className="chatbot-container">
             {/* Chat Window */}
@@ -95,7 +149,7 @@ const Chatbot = () => {
                         {messages.map((msg, idx) => (
                             <div key={idx} className={`chat-message ${msg.sender}`}>
                                 <div className="chat-bubble">
-                                    {msg.text}
+                                    {renderMessageContent(msg.text)}
                                 </div>
                             </div>
                         ))}
